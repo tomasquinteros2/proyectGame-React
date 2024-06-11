@@ -10,6 +10,92 @@
     box-sizing: border-box;
     color: #DCDCDD;
   }
+  #menu__toggle {
+    opacity: 0;
+  }
+  #menu__toggle:checked + .menu__btn > #span1 {
+    top: 6px;
+    transform: rotate(45deg);
+  }
+  #menu__toggle:checked + .menu__btn > #span2 {
+    top: 0;
+    transform: rotate(45deg);
+  }
+  #menu__toggle:checked + .menu__btn > #span3 {
+    top: -5px;
+    transform: rotate(135deg);
+  }
+  #menu__toggle:checked ~ .menu__box {
+    height: 40%;
+  }
+  .menu__btn {
+    position: absolute;
+    top: 25px;
+    left: 20px;
+    width: 40px;
+    height: 30px;
+    cursor: pointer;
+    z-index: 20;
+  }
+  .menu__btn > span{
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 3px;
+    background-color: #CFD8DC;;
+    transition-duration: .25s;
+    margin-bottom: 3px;
+  }
+  .menu__btn > #span1 {
+    top: -8px;
+  }
+  .menu__btn > #span3 {
+    top: 8px;
+  }
+  .menu__box {
+    display: block;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    height: 0;
+    margin: 60px 0px 0;
+    list-style: none;
+    background-color: #1A1B26;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, .4);
+    transition-duration: .25s;
+    z-index: 10;
+    overflow: hidden;
+  }
+  .menu__item {
+    display: block;
+    padding: 12px 24px;
+    color: #CFD8DC;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    text-decoration: none;
+    transition-duration: .25s;
+  }
+  .menu__item:hover {
+    background-color: #332a58;
+  }
+  .social{
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+  }
+  .line1{
+    width: 80%;
+    position: relative;
+    border-top: 2px solid #B8B8B8;
+  }
+  .line2{
+    width: 80%;
+    height: 10px;
+    top: 0px;
+    position: relative;
+    border-top: 2px solid #B8B8B8;
+  }
   h1{
     font-family: system-ui, -apple-system, BlinkMacSystemFont,
     'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -87,12 +173,12 @@
     display: none;
     height:30px;
     width: 30px;
-    margin-top: 15px;
-    padding: 3px;
+    margin-top: 10px;
+    right: 15px;
+    position: relative;
     color:#DCDCDD;
     font-size: larger;
     font-weight: bold;
-    background-color: #A48EFF;
     border-radius: 15px;
   }
   .carritoContainer p.show{
@@ -119,11 +205,6 @@
   .headerLeft{
     display: inline-flex;
     justify-content: flex-start;
-    cursor: pointer;
-  }
-  .search{
-    width: 100%;
-    margin: 10px;
   }
   
   .headerRight{
@@ -149,52 +230,17 @@
     display: flex;
     flex-direction: row;
   }
-  /*menu Plegable*/
-  #menuH, #menuU{
-    display: flex;
-    flex-direction: column;
-    background-color: #0B0C12;
-    width: 100%;
-    height: 0;
-    overflow: hidden;
-    z-index: 150;
-    transition: .5s ease-out;
-    position: relative;
-  }
-  #menuH.show, #menuU.show{
-    height: 350px;
-  }
-  .menuHomeOn{
-    display: none;
-  }
-  .menuHomeOff{
-    display: none;
-  }
-  #menuH li, #menuU li{
-    list-style: none;
-    font-style: normal;
-    text-transform: capitalize;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    background-color: transparent;
-  }
-  .menuList{
-    display: flex;
-    align-items: center;
-  }
-  
   .iconoRedes{
-    position: relative;
     display: flex;
+    position: relative;
     flex-direction: row;
+    bottom: 0px;
+    width: 100%;
   }
-  
   /*login*/
   .loginMain{
     display: flex;
     flex-direction: column;
-    background-color: #1A1B26;
     border: #A48EFF;
     border-radius: 70px;
     margin: 60px;
@@ -202,7 +248,7 @@
     padding: 20px;
   }
   .loginMain h2{
-    margin:20 px;
+    margin:20px;
   }
   .loginForm{
     display: flex;
@@ -226,25 +272,25 @@
   .loginForm input:focus{
     color:#0B0C12 ;
   }
-  
-  .opcionesRegistro{
+  .errorContainer{
+    width: 59%;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+  }
+  .errorLogin{
+    padding: 5px;
+    border-radius: 5px;
+    background-color: rgb(116, 27, 27);
   }
   .btn-registros {
     display: inline-flex;
     align-items: center;
-    position: relative;
-    width: 300px;
-    height: 40px;
-    margin: 10px;
-    border-radius: 15px;
-    position: relative;
+    width: 200px;
+    border-radius: 5px;
     overflow: hidden;
+    cursor: pointer;
   }
   .btn-registros:hover {
-    transform: scale(1.2);
+    text-decoration: underline;
   }
   .btn-registros img{
     margin: 5px;
@@ -264,9 +310,6 @@
   }
   .sesionGoogle p{
     color: #0B0C12;
-  }
-  .overlay {
-    position: relative;
   }
   .overlay::before {
     content: '';
@@ -313,6 +356,7 @@
     width: 50px;
     height: 50px;
     border-radius: 50px;
+    margin: 10px;
   }
   /*main*/
   /*¨seccion categoria*/
@@ -478,7 +522,7 @@
   section.category ul.slide .game-card .etiquetafree .title-etiqueta{
     margin-top: 2px;
   }
-  section.category ul.slide .game-card .etiqueta-triangulo{
+  section.category ul.slide .game-card .etiqueta-triangulo-free{
     width: 14px;
     height: 11px;
     transform: rotate(140grad);
@@ -845,12 +889,7 @@
     padding: 4px 0px 10px 18px;
     font-size: 14px;
   }
-  
-  .line{
-    width: 90%;
-    border-top: 1px solid #B8B8B8;
-    margin: 20px 5%;
-  }
+
   
   .footer-container .footer-social{
     width: 100%;
@@ -1066,13 +1105,14 @@
     top:10%;
     transition: 0.3s ease-out;
   }
-  #form-register .form{
+  .form{
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
-    width: 370px;
-    height: 500px;
-    background-color: #1A1B26;
+    width: 500px;
+    height: 400px;
+    background-color: hsla(256, 11%, 27%, 0.06);
     gap: 10px;
     border-radius: 20px;
   }
@@ -1124,15 +1164,118 @@
   .button:hover{
     background-color: #695aa3;
   }
-  
+  .loginMain .form .input-register{
+    margin:10px;
+    padding: 20px;
+    width: 300px;
+    height: 50px;
+    background-color: #0B0C12;
+    border-radius: 15px;
+    border:1px solid #DCDCDD;
+  }
+  .loginMain .button{
+    background-color: #DCDCDD;
+    color: #140101;
+    border-radius: 5px;
+    width: 100px;
+    height: 45px;
+  }
+  .buttons-login{
+    width: 300px;
+    display: flex;
+    justify-content: space-evenly;
+  }  
+  .loginMain .button{
+    font-size: 17px;
+  }
+  .loginMain .button:hover{
+    scale: 1.1;
+  }
   
   @media only screen and (min-width: 1024px){
-    header{
+    #menu__toggle:checked ~ .menu__box {
+      left: 0;
+      height: 100%;
+    }
+    .menu__btn {
+      position: fixed;
+      top: 35px;
+      left: 20px;
+      width: 50px;
+      height: 30px;
+      cursor: pointer;
+      z-index: 20;
+    }
+    .menu__btn > span{
+      display: block;
+      position: relative;
+      width: 100%;
+      height: 3px;
+      background-color: #CFD8DC;;
+      transition-duration: .25s;
+      margin-bottom: 3px;
+    }
+    .menu__btn > #span1 {
+      top: -8px;
+    }
+    .menu__btn > #span3 {
+      top: 8px;
+    }
+    .menu__box {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 300px;
+      height: 100%;
+      margin: 0;
+      padding: 80px 0px 0;
+      list-style: none;
+      background-color: #1A1B26;
+      box-shadow: 2px 2px 6px rgba(0, 0, 0, .4);
+      transition-duration: .25s;
+      z-index: 10;
+    }
+    .menu__item {
+      display: block;
+      padding: 12px 24px;
+      color: #CFD8DC;
+      font-family: 'Roboto', sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      text-decoration: none;
+      transition-duration: .25s;
+      cursor: pointer;
+    }
+    .menu__item:hover {
+      background-color: #332a58;
+    }
+    .social{
+      position: absolute;
+      bottom: 0px;
+      width: 100%;
+    }
+    .line1{
+      width: 80%;
+      position: relative;
+      border-top: 2px solid #B8B8B8;
+    }
+    .line2{
+      width: 80%;
+      height: 10px;
+      top: 0px;
+      position: relative;
+      border-top: 2px solid #B8B8B8;
+    }
+    .header{
       height: 80px;
       margin-bottom: 30px;
       position: sticky;
       top: 0%;
       z-index: 8;
+    }
+    .logOut{
+      justify-content: center;
     }
     .logoR{
       height: 70px;
@@ -1140,8 +1283,6 @@
     }
     .headerLeft{
       width: 550px;
-      justify-content: space-evenly;
-  
     }
     .search{
       width: 100%;
@@ -1346,7 +1487,8 @@
     }
     section.category ul.slide .game-card{
       width: 270px; 
-      height: 122px; 
+      height: 122px;
+      cursor: pointer; 
       
     }
     /* imagen card juego*/
@@ -1367,7 +1509,7 @@
       width: 240px;
     }
     .carrito{
-      width: 40%;
+      width: 40%; 
     }
     .btn-agregar{
       width: 20%;
@@ -1461,7 +1603,7 @@
     }
     #tiempo{
       position: absolute;
-      top: 10px;
+      bottom: 110px;
       left: 47.8%;
       color: #ffffff;
       margin-left: 10px;

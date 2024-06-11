@@ -1,27 +1,49 @@
-import React from 'react'
+import {useContext,useState,useEffect} from 'react'
 import { Card } from './Card'
-export const Category = () => {
+import { GameContext } from "../provider/GameContext"
+import { CarritoContext } from '../provider/CarritoContext'
+import { useNavigate } from 'react-router-dom'
+export const Category = ({category}) => {
+    const { games } = useContext( GameContext )
+    const { agregarCompra, eliminarCompra } = useContext(CarritoContext)
+
+    const navigate = useNavigate();
+
+    const handleAgregar = (compra) =>{
+        agregarCompra(compra)
+
+      }
+      const handleQuitar = (id) =>{
+        eliminarCompra(id)
+      }
+
+    const onclick= (game) => {
+        console.log(game.url)
+        if(!game.url){navigate("/home")}
+        else{navigate("/"+game.url)}
+    }
   return (
-    <div>
-        <section className="category">
-            <h2 className="game-category">Recomendado para ti</h2>
-            <button className="button-left">
-                <img src="../img/buttons/FLECHITA2.png" alt=""/>
-                <div className="transition"></div>
-            </button> 
-        <ul className="slide">
-            
-        </ul>
-            <button className="button-right-mobile">
-                <img src="../img/icons/flechaderechaMobile.png" alt="button-right-mobile"/>
-            </button>
-            <button className="button-left-mobile">
-                <img src="../img/icons/flechaIzquierdaMobile.png" alt="button-left-mobile"/>
-            </button>
-            <button className="button-right">
-                <img src="../img/buttons/FLECHITA.png" alt="button-right"/>
-            </button>
-    </section>
-</div>
+    <>
+        <div>
+            <ul className="slide" id={category}>
+                {games.map(game => (
+                    (game.category === category) && (
+                        <a key={game._id} className="game-card" onClick={() => onclick(game)}>
+                            <Card
+                                key={game._id}
+                                titulo={game.titulo}
+                                iconoEtiqueta={game.iconoEtiqueta}
+                                precio={game.precio}
+                                imagePath={game.imagePath}
+                                category={game.category}
+                                handleAgregar={() => handleAgregar(game)}
+                                handleQuitar={() => handleQuitar(game._id)}
+                            ></Card>
+                        </a>
+                    )
+                ))}
+            </ul>
+        </div>
+    </>
   )
 }
