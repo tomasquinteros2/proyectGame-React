@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import { GameContext } from './GameContext'
 export const CardProvider = ({ children }) => {
-  const url = 'http://localhost:3000/games'
+  const url = 'https://react-api-fdr8.onrender.com/games'
 
   const [games, setGames] = useState([])
 
