@@ -1,6 +1,6 @@
 import axios from "./axios";
 
-const API = 'http://localhost:3000/users'
+const API = 'https://react-api-fdr8.onrender.com'
 export const registerRequest = user => axios.post(`/users/register`,user)
 
 export const loginRequest = user => axios.post(`/users/login`,user)
