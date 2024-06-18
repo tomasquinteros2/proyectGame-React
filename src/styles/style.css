@@ -1580,7 +1580,7 @@
     }  
     .canvas{
       display: none;
-      background-color: white;
+      background-color: rgb(0, 0, 0);
     }
     #canvas-container{
       width: 100%;
