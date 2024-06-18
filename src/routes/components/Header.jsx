@@ -26,7 +26,7 @@ export const Header = () => {
                 <Hamburgermenu></Hamburgermenu>
                     <div className="headerRight">
                         <div className="carritoContainer">
-                            <img src={`${imgUrl}/icons/btn-cart`} alt="carrito" className="icon"/>
+                            <img src={`${imgUrl}/icons/btn-cart.png`} alt="carrito" className="icon"/>
                             {listaCompras.length > 0?
                                 <p id="carrito" className="show">{listaCompras.length}</p>
                             :
