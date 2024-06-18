@@ -128,7 +128,9 @@ const GamePage = () => {
                 </div>
                 <h1 id="turno" ref={turnoRef}></h1>
                 <h1 id="ganador" ref={ganadorRef}></h1>
-                <canvas id="canvas" width="1140" height="543" ref={canvasRef}></canvas>
+                <div id="canvas-container">
+                    <canvas id="canvas" width="1140" height="543" ref={canvasRef}></canvas>
+                </div>
 
                 <p id="tiempo" ref={tiempoRef}></p>
                 <div className="menusGame">

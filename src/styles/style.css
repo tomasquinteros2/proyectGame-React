@@ -1582,6 +1582,11 @@
       display: none;
       background-color: white;
     }
+    #canvas-container{
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
     .menusGame{
       right: 10px;
       top:20px;
