@@ -109,7 +109,7 @@ export function iniciarCanvas(current,g,t,nom1,nom2,time,ficha1Ref,ficha2Ref,fic
         //se inicializa el primer espacio en la esquina superior derecha
         let posicionEspacioX = posicionTableroX;
         let posicionEspacioY = posicionTableroY;   
-        
+        console.log(posicionTableroX,posicionTableroY)
         //recorro todas las filas
         for(let i=0;i<numFilas;i++){
             //a cada pos[i] le cargo un arreglo que es una fila
@@ -377,14 +377,30 @@ export function iniciarCanvas(current,g,t,nom1,nom2,time,ficha1Ref,ficha2Ref,fic
     let fichaActual=null;
     function handleMouseDown(event){
             //se obtiene la pos del mouse
-            let mouseX = event.layerX;
+            // Obtener las coordenadas del mouse en relación con la ventana del navegador
+            let mouseX = event.clientX;
+            let mouseY = event.clientY;
+            
+            // Obtener la posición del canvas en la página
+            let canvasRect = event.target.getBoundingClientRect();
+            let canvasX = canvasRect.left;
+            let canvasY = canvasRect.top;
+            
+            // Calcular las coordenadas del mouse en relación con el canvas
+            let canvasMouseX = mouseX - canvasX;
+            let canvasMouseY = mouseY - canvasY;
+            
+            console.log("Mouse en el canvas:", canvasMouseX, canvasMouseY);
+            /*let mouseX = event.layerX;
             let mouseY = event.layerY;
+            console.log(mouseX, mouseY)*/
+            console.log(turno)
             if(turno.getId()==1){
                 //reccore todas las fichas del jugador1
                 for(let i = fichasJugador1.length-1; i>=0; i--){
                     let ficha = fichasJugador1[i];
                     //le pregunta a ficha si esta clickeada
-                    if(ficha.isClicked(mouseX,mouseY)){
+                    if(ficha.isClicked(canvasMouseX,canvasMouseY)){
                         //setea la ficha actual
                         fichaActual = ficha;
                         break;
@@ -396,7 +412,7 @@ export function iniciarCanvas(current,g,t,nom1,nom2,time,ficha1Ref,ficha2Ref,fic
                 for(let i = fichasJugador2.length-1; i>=0; i--){
                     let ficha = fichasJugador2[i];
                     //le pregunta a ficha si esta clickeada
-                    if(ficha.isClicked(mouseX,mouseY)){
+                    if(ficha.isClicked(canvasMouseX,canvasMouseY)){
                         //setea la ficha actual
                         fichaActual = ficha;
                         break;
@@ -405,10 +421,22 @@ export function iniciarCanvas(current,g,t,nom1,nom2,time,ficha1Ref,ficha2Ref,fic
             }
     }
     function handleMouseMove(event){
+            // Obtener las coordenadas del mouse en relación con la ventana del navegador
+            let mouseX = event.clientX;
+            let mouseY = event.clientY;
+            
+            // Obtener la posición del canvas en la página
+            let canvasRect = event.target.getBoundingClientRect();
+            let canvasX = canvasRect.left;
+            let canvasY = canvasRect.top;
+            
+            // Calcular las coordenadas del mouse en relación con el canvas
+            let canvasMouseX = mouseX - canvasX;
+            let canvasMouseY = mouseY - canvasY;
             //si hay una ficha agarrada
             if(fichaActual!=null){
                 //mueve la ficha de lugar y redibuja todo
-                fichaActual.move(event.layerX,event.layerY);
+                fichaActual.move(canvasMouseX,canvasMouseY);
                 drawFigures();
             }
     }
