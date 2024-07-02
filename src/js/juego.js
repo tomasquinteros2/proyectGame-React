@@ -377,6 +377,7 @@ export function iniciarCanvas(current,g,t,nom1,nom2,time,ficha1Ref,ficha2Ref,fic
     let fichaActual=null;
     function handleMouseDown(event){
             //se obtiene la pos del mouse
+            console.log("mouse down")
             let mouseX = event.layerX;
             let mouseY = event.layerY;
             if(turno.getId()==1){
