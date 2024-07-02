@@ -377,21 +377,8 @@ export function iniciarCanvas(current,g,t,nom1,nom2,time,ficha1Ref,ficha2Ref,fic
     let fichaActual=null;
     function handleMouseDown(event){
             //se obtiene la pos del mouse
-            // Obtener las coordenadas del mouse en relación con la ventana del navegador
-            let mouseX = event.clientX;
-            let mouseY = event.clientY;
-            
-            // Obtener la posición del canvas en la página
-            let canvasRect = event.target.getBoundingClientRect();
-            let canvasX = canvasRect.left;
-            let canvasY = canvasRect.top;
-            
-            // Calcular las coordenadas del mouse en relación con el canvas
-            let canvasMouseX = mouseX - canvasX;
-            let canvasMouseY = mouseY - canvasY;
-            
-            console.log("Mouse en el canvas:", canvasMouseX, canvasMouseY);
-            /*let mouseX = event.layerX;
+            console.log("mouse down")
+            let mouseX = event.layerX;
             let mouseY = event.layerY;
             console.log(mouseX, mouseY)*/
             console.log(turno)
