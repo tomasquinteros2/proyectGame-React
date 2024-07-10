@@ -1,6 +1,8 @@
 import React from 'react'
 import { useAuth } from '../provider/AuthProvider';
+import { useNavigate } from 'react-router-dom';
 export const Footer = () => {
+    const navigate = useNavigate()
     const {isAuthenticated} = useAuth()
     const {logout} = useAuth()
 
@@ -10,6 +12,9 @@ export const Footer = () => {
     const isLogIn = () => {
         if(isAuthenticated){return true}
         return false
+    }
+    const navigateToHome = () => {
+        navigate("/home")
     }
   return (
     <>
@@ -23,20 +28,20 @@ export const Footer = () => {
                 <nav className="footer-nav">
                     <ul className="footer-links">
                         <h3>LINKS</h3>
-                        <li><a href="/home">Home</a></li>
+                        <li><a className="pointer"onClick={navigateToHome}>Home</a></li>
                         <li><a onClick={isClicked}>Log Out</a></li>
                     </ul>
                     <ul className="footer-links">
                         <h3>EMPRESA</h3>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Terms and Conditions</a></li>
-                        <li><a href="#">Policies</a></li>
-                        <li><a href="#">Cookies</a></li>
+                        <li><a href="">About</a></li>
+                        <li><a href="">Terms and Conditions</a></li>
+                        <li><a href="">Policies</a></li>
+                        <li><a href="">Cookies</a></li>
                     </ul>
                     <ul className="footer-links">
                         <h3>ASISTENCIA</h3>
-                        <li><a href="#">Help</a></li>
-                        <li><a href="#">Frequent's Questions</a></li>
+                        <li><a href="">Help</a></li>
+                        <li><a href="">Frequent's Questions</a></li>
                     </ul>
                 </nav> 
             </div>

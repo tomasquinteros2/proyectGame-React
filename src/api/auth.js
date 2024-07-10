@@ -1,11 +1,11 @@
 import axios from "./axios";
+import { API } from "../config";
 
-const API = 'https://react-api-fdr8.onrender.com'
-export const registerRequest = user => axios.post(`/users/register`,user)
+export const registerRequest = user => axios.post(API+`/users/register`,user)
 
-export const loginRequest = user => axios.post(`/users/login`,user)
+export const loginRequest = user => axios.post(API+`/users/login`,user)
 
-export const logoutRequest = user => axios.post(`/users/logout`,user)
+export const logoutRequest = user => axios.post(API+`/users/logout`,user)
 
-export const verifyTokenRequest = async () => axios.get(`/users/verify`);
+export const verifyTokenRequest = async () => axios.get(API+`/users/verify`);
 

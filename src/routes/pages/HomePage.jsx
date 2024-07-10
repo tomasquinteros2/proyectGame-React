@@ -5,8 +5,7 @@ import { useAuth } from '../provider/AuthProvider';
 import { useNavigate } from 'react-router-dom';
 export const HomePage = () => {
     const [carrouseles, setCarrouseles] = useState([]);
-    const {isAuthenticated} = useAuth()
-    const navigate = useNavigate()
+
     useEffect(() => {
             const carrouselElements = document.querySelectorAll(".slide");
 
@@ -44,13 +43,6 @@ export const HomePage = () => {
         { id: 5, nombre: "carreras"},
         { id: 6, nombre: "cartas"},
     ];
-    const isLogIn = () => {
-        if(isAuthenticated){return true}
-        else{
-            return false
-        }
-        
-    }
     return (
             <>
                 <ul>

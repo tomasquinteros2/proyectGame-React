@@ -1,6 +1,9 @@
 import React, { useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom'
 import { iniciarCanvas,reiniciarJuego,setNombre1,setNombre2 } from '../../js/juego';
 const GamePage = () => {
+    const navigate = useNavigate();
+
     const canvasRef = useRef(null);
     const ganadorRef = useRef(null);
     const turnoRef = useRef(null);
@@ -54,10 +57,13 @@ const GamePage = () => {
         console.log(event.target.value)
         setNombre2(event.target.value)
     };
+    const navigateToHome = () => {
+        navigate("/home")
+    }
     return (
         <div className="game-container">
         
-        <p className="breadcrums"><a href="/home">Home</a>/<a href="/game">Demon Slayer: 4 En Linea</a> </p>
+        <p className="breadcrums"><a className="item" onClick={(navigateToHome)}>Home</a>/<a className="item">Demon Slayer: 4 En Linea</a> </p>
         <section> 
             <div className="canvas-form">
                         <div>

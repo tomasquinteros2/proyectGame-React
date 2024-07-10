@@ -45,6 +45,8 @@ export const AuthProvider = ({children}) => {
     const sigIn =  async (user) => {
         try{
             const res = await loginRequest(user)
+            const token = res.data.token
+            localStorage.setItem('token', token);
             setisAuthenticated(true)
         }
         catch(e){
@@ -61,14 +63,17 @@ export const AuthProvider = ({children}) => {
     
     useEffect(()=>{
         const checkLogin = async () => {
-            const cookies = Cookies.get();
-            if (!cookies.token) {
+            const cookie = localStorage.getItem('token')
+            console.log(cookie)
+            if (!cookie) {
+                console.log("no hay token")
                 setisAuthenticated(false);
                 navigate('/login')
                 return;
             }
             try {
-                const res = await verifyTokenRequest(cookies.token);
+                console.log("si hay token")
+                const res = await verifyTokenRequest(cookie.token);
                 if (!res.data){
                     navigate('/login')
                     return setisAuthenticated(false);

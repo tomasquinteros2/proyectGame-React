@@ -18,7 +18,6 @@ export const Category = ({category}) => {
       }
 
     const onclick= (game) => {
-        console.log(game.url)
         if(!game.url){navigate("/home")}
         else{navigate("/"+game.url)}
     }

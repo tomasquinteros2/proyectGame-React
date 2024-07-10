@@ -10,6 +10,9 @@
     box-sizing: border-box;
     color: #DCDCDD;
   }
+  .pointer{
+    cursor: pointer;
+  }
   #menu__toggle {
     opacity: 0;
   }
@@ -561,7 +564,10 @@
   .game-container .breadcrums{
     font-weight: 500;
     font-size: 20px;
-    margin-bottom: 16px;
+    margin-bottom: 16px; 
+  }
+  .game-container .breadcrums .item{
+    cursor: pointer;
   }
   /*section*/
   .game-container section{
