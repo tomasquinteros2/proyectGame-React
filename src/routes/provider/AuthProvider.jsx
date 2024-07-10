@@ -46,7 +46,9 @@ export const AuthProvider = ({children}) => {
         try{
             const res = await loginRequest(user)
             const token = res.data.token
-            localStorage.setItem('token', token);
+            console.log(token)
+            setItemWithExpiry('token', token, 3600);
+            //Cookies.set('token', token, {expires:"1h", secure: true, sameSite: 'strict' });
             setisAuthenticated(true)
         }
         catch(e){
@@ -54,35 +56,73 @@ export const AuthProvider = ({children}) => {
         }
 
     }
-    const logout = () => {
+    const logout = async() => {
         Cookies.remove("token");
+        localStorage.removeItem('token')
         setUser(null);
         setisAuthenticated(false);
         navigate("/login")
+        try{
+            await logoutRequest()
+        }
+        catch(e){
+            console.error(e)
+        }
       };
-    
+    const setItemWithExpiry = (key, value, expirySeconds) => {
+        const now = new Date();
+        const item = {
+            value: value,
+            expiry: now.getTime() + (expirySeconds * 1000)
+        };
+        localStorage.setItem(key, JSON.stringify(item));
+    };
+
+    // Función para obtener un elemento de localStorage y verificar su expiración
+    const getItemWithExpiry = (key) => {
+        const itemStr = localStorage.getItem(key);
+        if (!itemStr) {
+            return null;
+        }
+        const item = JSON.parse(itemStr);
+        console.log(item+"item")
+        const now = new Date();
+        console.log(item.expiry+"item "+"<"+now.getTime())
+        if (now.getTime() > item.expiry) { // Si la fecha actual es mayor que la fecha de expiración, elimina el item
+            localStorage.removeItem(key);
+            return null;
+        }
+        return item;
+    };
     useEffect(()=>{
         const checkLogin = async () => {
-            const cookie = localStorage.getItem('token')
-            console.log(cookie)
-            if (!cookie) {
+            const token = getItemWithExpiry('token');
+            console.log(token)
+            if (!token) {
                 console.log("no hay token")
                 setisAuthenticated(false);
                 navigate('/login')
                 return;
             }
             try {
-                console.log("si hay token")
-                const res = await verifyTokenRequest(cookie.token);
-                if (!res.data){
+                console.log("si hay token",token)
+                const res = await verifyTokenRequest(token.value);
+                console.log(res)
+                if (res.status === 400){
                     navigate('/login')
                     return setisAuthenticated(false);
+                }
+                if (window.location.pathname === '/') {
+                    navigate('/home');
+                    return;
                 } 
                 setisAuthenticated(true);
                 setUser(res.data);
+                
                 } 
             catch (error) {
                 setisAuthenticated(false);
+                navigate('/login');
             }
         };
         checkLogin();

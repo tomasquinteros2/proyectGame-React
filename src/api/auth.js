@@ -7,5 +7,17 @@ export const loginRequest = user => axios.post(API+`/users/login`,user)
 
 export const logoutRequest = user => axios.post(API+`/users/logout`,user)
 
-export const verifyTokenRequest = async () => axios.get(API+`/users/verify`);
+export const verifyTokenRequest = async (token) => {
+    try {
+        console.log(token)
+        const response = await axios.get(`${API}/users/verify`, {
+            headers: {
+                Authorization: `${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
 
